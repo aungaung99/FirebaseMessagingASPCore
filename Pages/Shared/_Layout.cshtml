@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - FirebaseMessagingASPCore</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-page="/Index">FirebaseMessagingASPCore</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<div>
+			<h4>Firebase Messsage</h4>
+			<p id="notiMessage"></p>
+		</div>
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p id="exampleModalText"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2022 - FirebaseMessagingASPCore - <a asp-area="" asp-page="/Privacy">Privacy</a>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@*<script>
+			navigator.serviceWorker.register('sw.js', { type: 'module' });
+		</script>*@
+	@*<script type="module">
+			// Import the functions you need from the SDKs you need
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+			import { onMessage, getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-messaging.js";
+			// TODO: Add SDKs for Firebase products that you want to use
+			// https://firebase.google.com/docs/web/setup#available-libraries
+
+			// Your web app's Firebase configuration
+			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+			const firebaseConfig = {
+				apiKey: "AIzaSyDQs51qqcp_v2nd-FizNad3jA_cDCgt0T8",
+				authDomain: "testfirebasenoti-a8fff.firebaseapp.com",
+				projectId: "testfirebasenoti-a8fff",
+				storageBucket: "testfirebasenoti-a8fff.appspot.com",
+				messagingSenderId: "103338253557",
+				appId: "1:103338253557:web:7efcb9662ca6be08f3b9bc",
+				measurementId: "G-1WD96HTRK1"
+			};
+
+			// Initialize Firebase
+			const app = initializeApp(firebaseConfig);
+
+			const messaging = getMessaging(app);
+
+			Notification.requestPermission().then(function (permission) {
+				if (permission == "granted") {
+					console.log('Notification Permission Granted');
+					getDeviceToken();
+				}
+				else if (permission == "denied") {
+					console.log('Notification Permission Denied');
+				}
+			}).catch(function (err) { });
+
+
+			function getDeviceToken() {
+
+				getToken(messaging, { vapidKey: 'BH35UnsNCVCTpQhvjAAMYUfahPKRpwC0LyQwbAPAIqsk1oykxgS0hikxrME7vqp5Q5XwhHKxxHXU3ixnUwdhZgc' }).then((currentToken) => {
+					if (currentToken) {
+						// Send the token to your server and update the UI if necessary
+						console.log(currentToken);
+					} else {
+						// Show permission request UI
+						console.log('No registration token available. Request permission to generate one.');
+						// ...
+					}
+				}).catch((err) => {
+					console.log('An error occurred while retrieving token. ', err);
+					// ...
+				});
+			}
+
+			////check if browser supports service worker
+			//if ('serviceWorker' in navigator) {
+			//	// registers the service worker file with the filename
+			//	navigator.serviceWorker.register('/firebase/firebase-messaging-sw.js', { type: 'module' }).then(function (registration) {
+			//		console.log(messaging);
+			//		console.log(registration);
+			//	});
+			//}
+
+			//onMessage(messaging, (payload) => {
+			//	console.log('Message received. ', payload);
+			//	// ...
+			//});
+
+		</script>*@
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+	<script src="~/firebase.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

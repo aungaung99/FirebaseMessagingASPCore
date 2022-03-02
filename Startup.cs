@@ -1,3 +1,8 @@
+using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+
+using Google.Apis.Auth.OAuth2;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +30,11 @@ namespace FirebaseMessagingASPCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile("private_key.json")
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

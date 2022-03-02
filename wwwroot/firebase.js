@@ -12,13 +12,13 @@
 const messaging = firebase.messaging();
 
 Notification.requestPermission().then(function (permission) {
-	if (permission == "granted") {
+    if (permission == "granted") {
         console.log('Notification Permission Granted');
         getDeviceToken();
-	}
-	else if (permission == "denied") {
-		console.log('Notification Permission Denied');
-	}
+    }
+    else if (permission == "denied") {
+        console.log('Notification Permission Denied');
+    }
 }).catch(function (err) { });
 
 function getDeviceToken() {
@@ -28,6 +28,7 @@ function getDeviceToken() {
         if (currentToken) {
             // Send the token to your server and update the UI if necessary
             console.log(currentToken);
+            setCookie(currentToken);
         } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.');
@@ -37,6 +38,10 @@ function getDeviceToken() {
         console.log('An error occurred while retrieving token. ', err);
         // ...
     });
+}
+
+function setCookie(value) {
+    document.cookie = "registration_token=" + value;
 }
 
 messaging.onMessage((payload) => {
